@@ -1,4 +1,5 @@
 === Advanced Database Cleaner ===
+
 Contributors: symptote
 Donate Link: http://www.sigmaplugin.com/donation
 Tags: plugin, plugins, plugin wordpress, wordpress, database cleaner, clean database, database clean, database, clean, clean-up, clean up, cleanup, cleaner, delete orphan data, orphan data, delete revisions, delete revision, revision, delete draft, draft, delete trash, trash, delete spam, spam, delete auto draft, auto draft, delete postmeta, postmeta, delete commentmeta, commentmeta, delete relationships, relationships, delete transient feed, transient feed, optimize database, database optimize, database optimizer, optimize, optimizer, reset database, database reset, reset, admin, widget, schedule, scheduler, schedule clean-up, schedule optimize, multisite, multi-site, network, cron, cron job, clean cron, clean scheduled tasks, view cron, view cron job, view scheduled tasks, orphan tasks, options, view options, clean options, orphan options, tables, view tables, clean tables, orphan tables
