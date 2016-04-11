@@ -13,6 +13,7 @@ Tested up to: 4.4.2
 Stable tag: 2.0.0
 
 License: GPLv2 or later
+
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Clean up your database by deleting unused data such as 'revisions', 'drafts', optimize your database and more...
@@ -161,42 +162,52 @@ A scheduled task enables plugins to execute some actions at specified times, wit
 
 = What does mean "Revision"? What sql code is used to clean it? =
 WordPress stores a record (called "revision") of each saved draft or published update. This system allows you to see what changes were made in each post and page over time. However, this can lead to a lot of unnecessary overhead in your WordPress database, which consumes a lot of space. The sql query used by the plugin to clean all revisions is:
+
 `DELETE FROM posts WHERE post_type = 'revision'`
 
 = What does mean "Draft"? What sql code is used to clean it? =
 WordPress allows you to save a post or a page without having to publish it immediately. This way you can work on it as much as you want and publish it only when it is ready. This is called a Draft. Over time, you could have multiple drafts that you will never publish and hence you can clean them. The sql query used by the plugin to clean all drafts is:
+
 `DELETE FROM posts WHERE post_status = 'draft'`
 
 = What does mean "Auto-draft"? What sql code is used to clean it? =
 Wordpress automatically saves your post/page while you are editing it. This is called an auto-draft. If you don't hit the publish/update button, then the post/page will be saved as auto-draft and any modification to your post/page will not be visible in your public site. Over time, you could have multiple auto-drafts that you will never publish and hence you can clean them. The sql query used by the plugin to clean all auto-drafts is:
+
 `DELETE FROM posts WHERE post_status = 'auto-draft'`
 
 = What does mean "Pending comment"? What sql code is used to clean it? =
 Pending comments are comments published by users and which are awaiting for your approval before appearing in your site. In some cases, you will have to clean all these comments. The sql query used by the plugin to clean all pending comments is:
+
 `DELETE FROM comments WHERE comment_approved = '0'`
 
 = What does mean "Spam comment"? What sql code is used to clean it? =
 It is a comment that you (or a plugin) have marked as a spam. The sql query used by the plugin to clean all spam comments is:
+
 `DELETE FROM comments WHERE comment_approved = 'spam'`
 
 = What does mean "Trash comment"? What sql code is used to clean it? =
 A trash comment is a comment that you have deleted from your Wordpress and have been moved to the trash. A trash comment is not visible in your site and should be deleted forever. The sql query used by the plugin to clean all trash comments is:
+
 `DELETE FROM comments WHERE comment_approved = 'trash'`
 
 = What does mean "Orphan post meta"? What sql code is used to clean it? =
 The post meta data is the information you provide to viewers about each post. This information usually includes the author of the post, when it was written (or posted), and how the author categorized that particular post. In some cases, some post meta data information become orphan and do not belong to any post. They are then called "orphan postmeta" and should be cleaned since they are not useful. The sql query used by the plugin to clean all orphan postmeta is:
+
 `DELETE pm FROM postmeta pm LEFT JOIN posts wp ON wp.ID = pm.post_id WHERE wp.ID IS NULL`
 
 = What does mean "Orphan comment meta"? What sql code is used to clean it? =
 The same as "Orphan post meta" with the exception that "orphan comment meta" concern comments and not posts. The sql query used by the plugin to clean all orphan comment meta is:
+
 `DELETE FROM commentmeta WHERE comment_id NOT IN (SELECT comment_id FROM comments)`
 
 = What does mean "Orphan relationships"? What sql code is used to clean it? =
 Sometimes the wp_term_relationships table becomes bloated with many orphaned relationships. This happens particularly often if you’re using your site not as a blog but as some other type of content site where posts are deleted periodically. Over time, you could get thousands of term relationships for posts that no longer exist which consumes a lot of database space. The sql query used by the plugin to clean all orphan relationships is:
+
 `DELETE FROM term_relationships WHERE term_taxonomy_id=1 AND object_id NOT IN (SELECT id FROM posts)`
 
 = What does mean "Dashboard transient feed"? What sql code is used to clean it? =
 Transient are a way for storing cached data temporarily in your database by given it a name and a timeframe after which it will expire and be deleted. The sql query used by the plugin to clean dashboard transient feed is:
+
 `DELETE FROM options WHERE option_name LIKE '_site_transient_browser_%' OR option_name LIKE '_site_transient_timeout_browser_%' OR option_name LIKE '_transient_feed_%' OR option_name LIKE '_transient_timeout_feed_%'`
 
 = Is this plugin compatible with multisite? =
