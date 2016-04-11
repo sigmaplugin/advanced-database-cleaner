@@ -1,5 +1,4 @@
 === Advanced Database Cleaner ===
-
 Contributors: symptote
 
 Donate Link: http://www.sigmaplugin.com/donation
